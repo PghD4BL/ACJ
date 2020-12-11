@@ -7,7 +7,7 @@ library(lubridate)
 
 # Read in the data from the .csv file
 # The .csv was compiled from Allegheny County Jail daily census data available from the Western Pennsylvania Regional Data Center
-ACJ_pop <- read.csv("jantosep.csv")
+ACJ_pop <- read.csv("ACJ_pop.csv")
 
 # Confirm that there are no NAs among the race variable, and remove any if present
 # sum(is.na(ACJ_pop$age_at_census))
@@ -19,8 +19,8 @@ ACJ_pop$race[ACJ_pop$race != "B" & ACJ_pop$race !="W"] <- "Other"
 # Also create an age category column for 50+
 # Initiate a column for age category
 ACJ_pop$ageCategory <- NA
-ACJ_pop$ageCategory[ACJ_pop$age_at_census >= 60] <- "60+ years old"
-ACJ_pop$ageCategory[ACJ_pop$age_at_census < 60] <- "younger than 60 years old"
+ACJ_pop$ageCategory[ACJ_pop$age_at_census >= 40] <- "40+ years old"
+ACJ_pop$ageCategory[ACJ_pop$age_at_census < 40] <- "younger than 40 years old"
 
 # Aggregate data to daily totals by intersected variables of interest: gender, race, and age
 population_daily <- ACJ_pop[,c(3,4,6,7)] %>%
